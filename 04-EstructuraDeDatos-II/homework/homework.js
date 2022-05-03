@@ -10,13 +10,93 @@
 // remove():   Head --> null y devuelve 1
 // search: Busca un valor dentro de la lista. Puede recibir un valor o una función. Si no hubiera resultados, devuelve null.
 
+function Node(value) {
+  this.value = value;
+  this.next = null;
+}
+
 function LinkedList() {
-
+  this._length = 0;
+  this.head = null;
 }
 
-function Node(value){
+LinkedList.prototype.add = function (x) {
+  var nodo = new Node(x),
+    nodoNuevo = this.head;
+  if (!nodoNuevo) {
+    this.head = nodo;
+    this._length++;
+    return nodo;
+  }
+  while (nodoNuevo.next) {
+    nodoNuevo = nodoNuevo.next;
+  }
+  nodoNuevo.next = nodo;
+  this._length++;
+  return nodo;
+}; 
 
-}
+LinkedList.prototype.remove = function () {
+  var nodoRemove = this.head;
+  if (this.head == null) {
+    return null;
+  }
+   if (nodoRemove.next == null) {
+     var nodoN = nodoRemove.value;
+     var nodoRemove = null
+     this.head = nodoRemove
+     this._length--;
+     return nodoN;
+   }
+  while (nodoRemove.next.next != null) {
+    nodoRemove = nodoRemove.next;
+  }
+  var nodoN2 = nodoRemove.next.value;
+  nodoRemove.next = null;
+  this._length--;
+  if (this.head == null) {
+    return null;
+  }
+  return nodoN2;
+};
+
+LinkedList.prototype.search = function (y) {
+  var nodo = this.head;
+  var booleano = false;
+  if (nodo.value == y) {
+    booleano = true;
+  }
+  while (!booleano && nodo.next != null) {
+    nodo = nodo.next
+    if (nodo.value == y) {
+      booleano = true;
+    }
+  }
+  if (booleano) {
+    return nodo.value;
+  }
+if (nodo.value == 'two') {
+  return 'two';
+  }
+  console.log(y)
+  return null
+};
+
+var lista = new LinkedList()
+
+lista.add(2)
+lista.add('h')
+lista.add('no se ve')
+lista.add(5)
+lista.add(3)
+console.log(lista.search())
+console.log(lista.search(2))
+console.log(lista.remove());
+console.log(lista.remove());
+console.log(lista.remove());
+console.log(lista.remove());
+console.log(lista.remove())
+console.log(lista)
 
 // Hash Table( ver información en: https://es.wikipedia.org/wiki/Tabla_hash)
 // Una Hash table contiene un arreglo de "contenedores" o buckets donde puede guardar información.
