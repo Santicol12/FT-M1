@@ -6,29 +6,26 @@ function factorear(num) {
   // los factores por los cuales se va dividiendo a dicho número (De menor a mayor)
   // Ej: factorear(180) --> [1, 2, 2, 3, 3, 5] Ya que 1x2x2x3x3x5 = 180 y son todos números primos
   // Tu código:
-  var arregloDePrimos = [2, 3, 5, 7, 11, 13, 17, 19, 23, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
-  var arreglo = [1]
-  while (num > 1) {
-    let i=0;
-    for (i = 0; i < arregloDePrimos.length; i++) {
-      if (num % arregloDePrimos[i] === 0) {
-        break;
-      }
+  var arreglo = [1];
+  var divisor = 2;
+  while (num !== 1) {
+    if (num % divisor === 0) {
+      arreglo.push(divisor);
+      num = num / divisor; //
+    } else {
+      divisor++;
     }
-    num /= arregloDePrimos[i]
-    arreglo.push(arregloDePrimos[i])
   }
   return arreglo
 }
 
-let arregloDeNumeros = [2, 4, 6, -2, 0, 1, 11, 15, 7];
 function bubbleSort(array) {
   // Implementar el método conocido como bubbleSort para ordenar de menor a mayor
   // el array recibido como parámetro
   // Devolver el array ordenado resultante
-  // Tu código:
+  // Tu código: [1, 2, 4, -2]
   for (let i = array.length; i >= 0; i--) { 
-    for (let j = 1; j < i; j++) { 
+    for (let j = 1; j < i; j++) { // 
       if (array[j-1] > array[j]) {
         let temp = array[j - 1]
         array[j - 1] = array[j]
@@ -38,7 +35,6 @@ function bubbleSort(array) {
   }
   return array
 }
-// console.log(bubbleSort(arregloDeNumeros))
 
 function insertionSort(array) {
   // Implementar el método conocido como insertionSort para ordenar de menor a mayor

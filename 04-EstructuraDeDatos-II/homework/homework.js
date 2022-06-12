@@ -82,21 +82,6 @@ if (nodo.value == 'two') {
   return null
 };
 
-var lista = new LinkedList()
-
-lista.add(2)
-lista.add('h')
-lista.add('no se ve')
-lista.add(5)
-lista.add(3)
-console.log(lista.search())
-console.log(lista.search(2))
-console.log(lista.remove());
-console.log(lista.remove());
-console.log(lista.remove());
-console.log(lista.remove());
-console.log(lista.remove())
-console.log(lista)
 
 // Hash Table( ver información en: https://es.wikipedia.org/wiki/Tabla_hash)
 // Una Hash table contiene un arreglo de "contenedores" o buckets donde puede guardar información.
@@ -112,6 +97,14 @@ console.log(lista)
 
 function HashTable() {
 
+}
+
+HashTable.prototype.hash = function (value) {
+  var aux = 0
+  for (let i = 0; i < value.length; i++) {
+    aux = aux + value.charCodeAt(i);
+  }
+  return aux % this.numBuckets
 }
 
 

@@ -13,6 +13,9 @@ function counter() {
   };
 }
 
+const newCounter = counter()
+console.log(newCounter())
+
 function cacheFunction(cb) {
   // Usa closures para crear un caché para la función cb.
   // la función que retornas debe aceptar un solo argumento e invocar a cb con ese argumento

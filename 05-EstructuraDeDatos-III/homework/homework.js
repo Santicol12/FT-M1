@@ -14,6 +14,7 @@ function BinarySearchTree(value) {
   this.right = null;
   this._length = 1;
 }
+
 BinarySearchTree.prototype.insert = function (x) {
   if (x === this.value) {
     return
@@ -55,6 +56,15 @@ BinarySearchTree.prototype.contains = function (google) {
   }
 };
 
+var arbol = new BinarySearchTree(23)
+console.log(arbol)
+arbol.insert(30)
+arbol.insert(50);
+arbol.insert(20);
+console.log(arbol)
+console.log(arbol.contains(20))
+
+
 BinarySearchTree.prototype.depthFirstForEach = function (cb, opcion) {
   if (!opcion || opcion === "in-order") { 
     if (this.left) { 
@@ -84,7 +94,7 @@ BinarySearchTree.prototype.depthFirstForEach = function (cb, opcion) {
 };
 
 BinarySearchTree.prototype.breadthFirstForEach = function (cb, array) {
-    if (!array) {
+    if (!array) { 
     var array = [];
   }
   if (this.left) {
@@ -95,13 +105,32 @@ BinarySearchTree.prototype.breadthFirstForEach = function (cb, array) {
   }
   cb(this.value);
   if (array.length > 0) {
-    array.shift().breadthFirstForEach(cb, array);
+    array.shift().breadthFirstForEach(cb, array); 
   }
 };
 
 BinarySearchTree.prototype.size = function () {
   return this._length
 };
+
+
+function balance(node) {
+  if (node.balanceFactor > 1) {
+    // left subtree is higher than right subtree
+    if (node.left.balanceFactor > 0) {
+      rightRotation(node);
+    } else if (node.left.balanceFactor < 0) {
+      leftRightRotation(node);
+    }
+  } else if (node.balanceFactor < -1) {
+    // right subtree is higher than left subtree
+    if (node.right.balanceFactor < 0) {
+      leftRotation(node);
+    } else if (node.right.balanceFactor > 0) {
+      rightLeftRotation(node);
+    }
+  }
+}
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
