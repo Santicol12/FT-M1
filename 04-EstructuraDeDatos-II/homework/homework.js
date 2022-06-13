@@ -95,6 +95,60 @@ if (nodo.value == 'two') {
 //    - Usar el número obtenido, para buscar(llamando al método get) el contenedor o bucket donde está el valor.
 //    - Retornar dicho valor.
 
+
+function HashTable() {
+  // arreglo de buckets
+  this.buckets = [];
+  this.numBuckets = 35;
+}
+let nuevaHashTable = new HashTable();
+
+// hash: función hasheadora
+HashTable.prototype.hash = function (key) {
+  // suma de codigo numerico de cada caracter del string que recibimos
+  let sum = 0;
+  for (let i = 0; i < key.length; i++) {
+    sum += key.charCodeAt(i);
+  }
+  // calcula el módulo de ese número total por la cantidad de buckets
+  return sum % this.numBuckets; // valor < 35
+};
+
+// set: recibe el conjunto clave valor (como dos parámetros distintos), hashea la clave invocando al método hash, y almacena todo el conjunto en el bucket correcto.
+
+HashTable.prototype.set = function (key, value) {
+  // si key no es string devolver error
+  if (typeof key !== "string") {
+    throw TypeError("Keys must be strings");
+  }
+
+  let i = this.hash(key);
+  
+  if (this.buckets[i] === undefined) {
+    this.buckets[i] = {}; // <---- casillero
+  }
+  this.buckets[i][key] = value;
+};
+
+// get: recibe una clave por parámetro, y busca el valor que le corresponde en el bucket correcto de la tabla.
+
+HashTable.prototype.get = function (key) {
+  let i = this.hash(key);
+
+  return this.buckets[i][key]; //
+};
+
+// hasKey: recibe una clave por parámetro y consulta si ya hay algo almacenado en la tabla con esa clave (retorna un booleano)
+HashTable.prototype.hasKey = function (key) {
+  let i = this.hash(key);
+
+  return this.buckets[i].hasOwnProperty(key);
+};
+
+
+
+
+/*
 function HashTable() {
 
 }
@@ -106,7 +160,7 @@ HashTable.prototype.hash = function (value) {
   }
   return aux % this.numBuckets
 }
-
+*/
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
